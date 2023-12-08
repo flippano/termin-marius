@@ -1,0 +1,17 @@
+Dokumentasjon: 
+
+ 
+
+Uke 39: skrev projekt beskrivelse, startet på planlegging for nettsiden (hvordan database, hva slags server, etc.) 
+
+ 
+
+Uke 42: begynte å jobbe på login og registrering, startet med å lagre brukernavn og passord I localstorage som en test før jeg begynte med ordentlig databaser. 
+
+ 
+
+Uke 48: etter litt tid med oppgaver og alt sånt, kjønte jeg mer av php og mariadb, så jeg gjorde ferdig login og registrering. Jeg tenkte også at dette ikke var nok, så jeg endret på projekt beskrivelsen og valgte å legge til live notifications og en admin bruker, med password hashing i php. 
+
+ 
+
+Uke 49: prøvde å hoste, men fikk ikke til. 
