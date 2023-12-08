@@ -1,0 +1,106 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema bare-vifter
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema bare-vifter
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `bare-vifter` DEFAULT CHARACTER SET utf8 ;
+USE `bare-vifter` ;
+
+-- -----------------------------------------------------
+-- Table `bare-vifter`.`kunde`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bare-vifter`.`kunde` ;
+
+CREATE TABLE IF NOT EXISTS `bare-vifter`.`kunde` (
+  `idkunde` INT NOT NULL AUTO_INCREMENT,
+  `fornavn` VARCHAR(45) NOT NULL,
+  `etternavn` VARCHAR(45) NOT NULL,
+  `postnummer` CHAR(4) NOT NULL,
+  `tlf` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idkunde`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bare-vifter`.`produkter`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bare-vifter`.`produkter` ;
+
+CREATE TABLE IF NOT EXISTS `bare-vifter`.`produkter` (
+  `idprodukter` INT NOT NULL AUTO_INCREMENT,
+  `type` INT(3) NOT NULL,
+  `hastighet` INT(3) NOT NULL,
+  `størrelse` INT(3) NOT NULL,
+  PRIMARY KEY (`idprodukter`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bare-vifter`.`bestilling`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bare-vifter`.`bestilling` ;
+
+CREATE TABLE IF NOT EXISTS `bare-vifter`.`bestilling` (
+  `idbestilling` INT NOT NULL AUTO_INCREMENT,
+  `idkunde` INT NULL,
+  PRIMARY KEY (`idbestilling`),
+  INDEX `fk_bestilling_kunde1_idx` (`idkunde` ASC),
+  CONSTRAINT `fk_bestilling_kunde1`
+    FOREIGN KEY (`idkunde`)
+    REFERENCES `bare-vifter`.`kunde` (`idkunde`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bare-vifter`.`Varer_i_bestilling`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bare-vifter`.`Varer_i_bestilling` ;
+
+CREATE TABLE IF NOT EXISTS `bare-vifter`.`Varer_i_bestilling` (
+  `Bestilling` INT NULL,
+  `product` INT NULL,
+  INDEX `fk_Varer_i_bestilling_bestilling1_idx` (`Bestilling` ASC),
+  INDEX `fk_Varer_i_bestilling_produkter1_idx` (`product` ASC),
+  CONSTRAINT `fk_Varer_i_bestilling_bestilling1`
+    FOREIGN KEY (`Bestilling`)
+    REFERENCES `bare-vifter`.`bestilling` (`idbestilling`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Varer_i_bestilling_produkter1`
+    FOREIGN KEY (`product`)
+    REFERENCES `bare-vifter`.`produkter` (`idprodukter`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `bare-vifter`.`postnummer`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bare-vifter`.`postnummer` ;
+
+CREATE TABLE IF NOT EXISTS `bare-vifter`.`postnummer` (
+  `postnummer` CHAR(4) NOT NULL,
+  `sted` VARCHAR(45) NOT NULL,
+  INDEX `fk_postnummer_kunde1_idx` (`postnummer` ASC),
+  CONSTRAINT `fk_postnummer_kunde1`
+    FOREIGN KEY (`postnummer`)
+    REFERENCES `bare-vifter`.`kunde` (`postnummer`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

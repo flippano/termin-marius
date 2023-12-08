@@ -1,0 +1,22 @@
+delete from varer_i_bestilling;
+delete from bestilling;
+delete from kunde;
+delete from produkter;
+
+
+
+insert into kunde (idkunde, fornavn, etternavn, postnummer, tlf) Values ("1", "sex", "johnson", "6969", "98312643");
+INSERT INTO kunde (idkunde, fornavn, etternavn, postnummer, tlf) VALUES ("2", "Alice", "Smith", "1234", "87654321");
+INSERT INTO kunde (idkunde, fornavn, etternavn, postnummer, tlf) VALUES ("3", "Bob", "Johnson", "5678", "65432178");
+INSERT INTO kunde (idkunde, fornavn, etternavn, postnummer, tlf) VALUES ("4", "Charlie", "Daviss", "9876", "12345678");
+
+insert into produkter (idprodukter, type, hastighet, størrelse) values ("1", "1", "2", "3");
+INSERT INTO produkter (idprodukter, type, hastighet, størrelse) VALUES ("2", "2", "1", "3");
+INSERT INTO produkter (idprodukter, type, hastighet, størrelse) VALUES ("3", "3", "2", "1");
+INSERT INTO produkter (idprodukter, type, hastighet, størrelse) VALUES ("4", "1", "3", "2");
+
+INSERT INTO bestilling (idbestilling, idkunde) values (1, 2);
+INSERT INTO bestilling (idbestilling, idkunde) values (2, 3);
+
+INSERT INTO varer_i_bestilling (bestilling, product) values (1, 3);
+INSERT INTO varer_i_bestilling (bestilling, product) values (2, 2);
